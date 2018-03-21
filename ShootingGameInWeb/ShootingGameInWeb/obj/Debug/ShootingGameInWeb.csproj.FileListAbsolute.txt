@@ -1,0 +1,14 @@
+C:\Users\Youri\source\repos\ShootingGameInWeb\ShootingGameInWeb\bin\TypeScriptHTMLApp1.dll.config
+C:\Users\Youri\source\repos\ShootingGameInWeb\ShootingGameInWeb\bin\TypeScriptHTMLApp1.dll
+C:\Users\Youri\source\repos\ShootingGameInWeb\ShootingGameInWeb\bin\TypeScriptHTMLApp1.pdb
+C:\Users\Youri\source\repos\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\ShootingGameInWeb.csprojResolveAssemblyReference.cache
+C:\Users\Youri\source\repos\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\ShootingGameInWeb.csproj.CoreCompileInputs.cache
+C:\Users\Youri\source\repos\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\TypeScriptHTMLApp1.dll
+C:\Users\Youri\source\repos\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\TypeScriptHTMLApp1.pdb
+D:\WebProject\ShootingGameInWeb\ShootingGameInWeb\bin\TypeScriptHTMLApp1.dll.config
+D:\WebProject\ShootingGameInWeb\ShootingGameInWeb\bin\TypeScriptHTMLApp1.dll
+D:\WebProject\ShootingGameInWeb\ShootingGameInWeb\bin\TypeScriptHTMLApp1.pdb
+D:\WebProject\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\ShootingGameInWeb.csprojResolveAssemblyReference.cache
+D:\WebProject\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\ShootingGameInWeb.csproj.CoreCompileInputs.cache
+D:\WebProject\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\TypeScriptHTMLApp1.dll
+D:\WebProject\ShootingGameInWeb\ShootingGameInWeb\obj\Debug\TypeScriptHTMLApp1.pdb
