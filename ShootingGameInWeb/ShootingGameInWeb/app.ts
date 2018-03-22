@@ -1,19 +1,31 @@
-﻿const Fps: number = 60;
-const PercentageCreateEnemy: number = 50; // 10 ~ 100  more less, more enemy
+﻿class Common {
+    static readonly Fps: number = 60;
+    static readonly PercentageCreateEnemy: number = 50; // 10 ~ 100  more less, more enemy
 
-const ScreenHeight: number = 800;
-const ScreenWidth: number = 500;
+    static readonly ScreenHeight: number = 800;
+    static readonly ScreenWidth: number = 500;
 
-const PoolingEnemyCount: number = 5;
+    static readonly PlayerMoveSpeed: number = 8;
+    static readonly BulletSpeed: number = 8;
 
-const Canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('Canvas');
-const Context: CanvasRenderingContext2D = Canvas.getContext("2d");
+    static readonly PoolingEnemyCount: number = 5;
+    static readonly PoolingBulletCount: number = 10;
+
+    static readonly Canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('Canvas');
+    static readonly Context: CanvasRenderingContext2D = Common.Canvas.getContext("2d");
+
+    public static DrawContext(img: HTMLImageElement, xPos: number, yPos: number, w: number, h: number): void {
+        Common.Context.drawImage(img, xPos, yPos, w, h);
+    }
+}
+
+
 
 
 class BackGround {
 
     private _backImgYPos1: number = 0;
-    private _backImgYPos2: number = -ScreenHeight;
+    private _backImgYPos2: number = -Common.ScreenHeight;
     private _scrollSpeed: number = 10;
 
     private readonly _backImg: HTMLImageElement = new Image();
@@ -24,19 +36,19 @@ class BackGround {
 
     public BackScroll(): void {
 
-        Context.drawImage(this._backImg, 0, this._backImgYPos1, ScreenWidth, ScreenHeight);
-        Context.drawImage(this._backImg, 0, this._backImgYPos2, ScreenWidth, ScreenHeight);
+        Common.DrawContext(this._backImg, 0, this._backImgYPos1, Common.ScreenWidth, Common.ScreenHeight);
+        Common.DrawContext(this._backImg, 0, this._backImgYPos2, Common.ScreenWidth, Common.ScreenHeight);
 
         this._backImgYPos1 += this._scrollSpeed;
         this._backImgYPos2 += this._scrollSpeed;
 
-        if (this._backImgYPos1 >= ScreenHeight) {
-            this._backImgYPos1 = -ScreenHeight;
+        if (this._backImgYPos1 >= Common.ScreenHeight) {
+            this._backImgYPos1 = -Common.ScreenHeight;
             this._backImgYPos2 = 0;
         }
 
-        if (this._backImgYPos2 >= ScreenHeight) {
-            this._backImgYPos2 = -ScreenHeight;
+        if (this._backImgYPos2 >= Common.ScreenHeight) {
+            this._backImgYPos2 = -Common.ScreenHeight;
             this._backImgYPos1 = 0;
         }
     }
@@ -57,14 +69,14 @@ class Enemy {
     constructor() {
         this._enemyImg.src = EnemyImgSrc; // do you random if other img src exist;
         var randomNum: number = Math.floor(Math.random() * 5);
-        this._xPos = ScreenWidth * 0.1 * randomNum;
+        this._xPos = Common.ScreenWidth * 0.1 * randomNum;
         this._yPos = -50;
     }
 
     public Init(): void {
         this._isDead = false;
         var randomNum: number = Math.floor(Math.random() * 9);
-        this._xPos = ScreenWidth * 0.1 * randomNum;
+        this._xPos = Common.ScreenWidth * 0.1 * randomNum;
         this._yPos = -50;
     }
 
@@ -75,14 +87,14 @@ class Enemy {
     public MoveEnemy(): void {
         if (!this._isDead) {
             this._yPos += this._moveSpeed;
-            if (this._yPos >= ScreenHeight + 50) {
+            if (this._yPos >= Common.ScreenHeight + 50) {
                 this._isDead = true;
             }
         }
     }
     public Draw(): void {
         if (!this._isDead) {
-            Context.drawImage(this._enemyImg, this._xPos, this._yPos, 100, 100);
+            Common.DrawContext(this._enemyImg, this._xPos, this._yPos, 100, 100);
         }
     }
 }

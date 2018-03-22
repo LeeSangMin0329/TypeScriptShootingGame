@@ -70,7 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="Bullet.ts" />
     <TypeScriptCompile Include="GameManager.ts" />
+    <TypeScriptCompile Include="InputManager.ts" />
     <TypeScriptCompile Include="Instantiate.ts" />
     <TypeScriptCompile Include="Player.ts" />
   </ItemGroup>

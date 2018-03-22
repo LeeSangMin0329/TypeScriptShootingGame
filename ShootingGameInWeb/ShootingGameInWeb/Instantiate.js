@@ -1,13 +1,14 @@
 var gameManager = new GameManager();
 var backGround = new BackGround();
-var player = new Player(); // debug
 function GameLoop() {
+    calcKeyInnput();
     gameManager.MainUpdate();
     backGround.BackScroll();
     gameManager.MainDraw();
-    player.Draw();
 }
-window.onload = function () {
-    setInterval(GameLoop, 1000 / Fps);
-};
+window.addEventListener('load', function () {
+    window.addEventListener('keydown', OnKeyDown);
+    window.addEventListener('keyup', OnKeyUp);
+    setInterval(GameLoop, 1000 / Common.Fps);
+});
 //# sourceMappingURL=Instantiate.js.map

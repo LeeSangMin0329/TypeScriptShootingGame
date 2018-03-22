@@ -2,14 +2,18 @@
     private _enemyList: Enemy[];
     private _randomNum: number;
 
+    public _player: Player; // deb
+
     constructor() {
         this._enemyList = new Array<Enemy>();
-        for (var i = 0; i < PoolingEnemyCount; i++) {
+        for (var i = 0; i < Common.PoolingEnemyCount; i++) {
             this._enemyList.push(new Enemy());
         }
+
+        this._player = new Player();
     }
     private EnemyMake(): void {
-        this._randomNum = Math.floor(Math.random() * PercentageCreateEnemy);
+        this._randomNum = Math.floor(Math.random() * Common.PercentageCreateEnemy);
         if (this._randomNum != 10) {
             return;
         }
@@ -37,11 +41,17 @@
 
 
     public MainUpdate(): void {
+        this._player.Update();
         this.EnemyMake();
         this.EnemyUpdate();
     }
     public MainDraw(): void {
         this.EnemyDraw();
+        this._player.Draw();
+    }
+
+    public PlayerMove(xDist: number, yDist: number) {
+        this._player.Move(xDist, yDist);
     }
 }
 

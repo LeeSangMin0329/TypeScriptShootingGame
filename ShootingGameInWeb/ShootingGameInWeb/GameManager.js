@@ -1,12 +1,13 @@
 var GameManager = /** @class */ (function () {
     function GameManager() {
         this._enemyList = new Array();
-        for (var i = 0; i < PoolingEnemyCount; i++) {
+        for (var i = 0; i < Common.PoolingEnemyCount; i++) {
             this._enemyList.push(new Enemy());
         }
+        this._player = new Player();
     }
     GameManager.prototype.EnemyMake = function () {
-        this._randomNum = Math.floor(Math.random() * PercentageCreateEnemy);
+        this._randomNum = Math.floor(Math.random() * Common.PercentageCreateEnemy);
         if (this._randomNum != 10) {
             return;
         }
@@ -32,11 +33,16 @@ var GameManager = /** @class */ (function () {
         }
     };
     GameManager.prototype.MainUpdate = function () {
+        this._player.Update();
         this.EnemyMake();
         this.EnemyUpdate();
     };
     GameManager.prototype.MainDraw = function () {
         this.EnemyDraw();
+        this._player.Draw();
+    };
+    GameManager.prototype.PlayerMove = function (xDist, yDist) {
+        this._player.Move(xDist, yDist);
     };
     return GameManager;
 }());
