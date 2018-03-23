@@ -20,8 +20,8 @@ class Bullet {
         this._img = new Image();
         this._img.src = "images/bullet.png";
 
-        this._height = 50;
-        this._width = 50;
+        this._height = 20;
+        this._width = 20;
     }
 
     public Init(xPos: number, yPos: number) {

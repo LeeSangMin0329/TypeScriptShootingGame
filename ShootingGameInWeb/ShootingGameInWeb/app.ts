@@ -1,6 +1,6 @@
 ﻿class Common {
     static readonly Fps: number = 60;
-    static readonly PercentageCreateEnemy: number = 50; // 10 ~ 100  more less, more enemy
+    static readonly PercentageCreateEnemy: number = 30; // 10 ~ 100  more less, more enemy
 
     static readonly ScreenHeight: number = 800;
     static readonly ScreenWidth: number = 500;
@@ -15,23 +15,35 @@
     static KeyPressOn = {};
 
     static Score: number = 0;
+    static Volume: number = 0.4;
 
-    static readonly Canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('Canvas');
-    static readonly Context: CanvasRenderingContext2D = Common.Canvas.getContext("2d");
+    // off canvas
+    static Canvas: HTMLCanvasElement;
+    static Context: CanvasRenderingContext2D;
+
+    // double buffering
+    static ViewCanvas: HTMLCanvasElement;
+    static ViewContext: CanvasRenderingContext2D;
 
     public static DrawContext(img: HTMLImageElement, xPos: number, yPos: number, w: number, h: number): void {
         Common.Context.drawImage(img, xPos, yPos, w, h);
     }
 
     public static DrawText(str: string, xPos: number, yPos: number) {
+        Common.Context.fillStyle = "white";
+        Common.Context.textAlign = 'left';
+        Common.Context.font = '20pt Arial';
+
         Common.Context.fillText(str, xPos, yPos);
     }
+
+    public static DrawMenu() {
+        Common.Context.fillStyle = "white";
+        Common.Context.textAlign = 'center';
+        Common.Context.font = '30pt Arial';
+        Common.Context.fillText("Press Enter Key to Start.", Common.ScreenWidth / 2, Common.ScreenHeight / 2);
+    }
 }
-
-Common.Context.fillStyle = "white";
-Common.Context.font = '20pt Arial';
-
-
 
 class BackGround {
 
@@ -41,8 +53,13 @@ class BackGround {
 
     private readonly _backImg: HTMLImageElement = new Image();
 
+    private _bgSound: HTMLAudioElement = new Audio("sounds/bg.mp3");
+
     constructor() {
-        this._backImg.src = "images/backBg.jpg";
+        this._backImg.src = "images/spaceBg.jpg";
+        this._bgSound.volume = Common.Volume;
+        this._bgSound.loop = true;
+        this._bgSound.play();
     }
 
     public BackScroll(): void {

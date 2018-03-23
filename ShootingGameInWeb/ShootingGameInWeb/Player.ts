@@ -14,7 +14,7 @@ class Player {
     private _height: number;
     private _width: number;
 
-    public IsDead: boolean = false;
+    public IsDead: boolean;
 
     public XPos(): number { return this._xPos; }
     public YPos(): number { return this._yPos; }
@@ -25,6 +25,10 @@ class Player {
     private _bulletList: Bullet[];
     public BulletList(): Bullet[] { return this._bulletList; }
 
+    // Eff & Sound
+    private _eff: Explosion1 = new Explosion1();
+    private _shotSound: HTMLAudioElement = new Audio("sounds/shot.mp3");
+
     constructor() {
         this._img = new Array<HTMLImageElement>(this._imgLangth);
         for (var i = 0; i < this._img.length; i++) {
@@ -32,6 +36,18 @@ class Player {
             this._img[i].src = "images/player0" + i + ".png";
         }
 
+        this.Init();
+
+        // bullet
+        this._bulletList = new Array<Bullet>();
+        for (var i = 0; i < Common.PoolingBulletCount; i++) {
+            this._bulletList.push(new Bullet());
+        }
+
+        this._shotSound.volume = Common.Volume;
+    }
+
+    public Init() {
         this._xPos = Common.ScreenWidth / 2;
         this._yPos = Common.ScreenHeight * 0.8;
         this._count = 0;
@@ -40,11 +56,7 @@ class Player {
         this._height = 100;
         this._width = 100;
 
-        // bullet
-        this._bulletList = new Array<Bullet>();
-        for (var i = 0; i < Common.PoolingBulletCount; i++) {
-            this._bulletList.push(new Bullet());
-        }
+        this.IsDead = false;
     }
 
     public Draw(): void {
@@ -69,6 +81,9 @@ class Player {
 
             Common.DrawContext(this._img[this._imgIndex], this._xPos, this._yPos, this._width, this._height);
         }
+        else if (!this._eff.IsEnd()) {
+            this._eff.Draw(this._xPos, this._yPos);
+        }
     }
 
     public Update(): void {
@@ -82,6 +97,9 @@ class Player {
                 for (var i = 0; i < this._bulletList.length; i++) {
                     if (this._bulletList[i].IsDead) {
                         this._bulletList[i].Init(this._xPos + this._img[0].height / 2, this._yPos + this._img[0].width / 2);
+
+                        this._shotSound.currentTime = 0;
+                        this._shotSound.play();
                         break;
                     }
                 }
@@ -112,6 +130,11 @@ class Player {
         if (Common.KeyPressOn["39"] && this._xPos <= Common.Canvas.width - this._width / 2)
 
             this._xPos += Common.PlayerMoveSpeed;  //right
+    }
+
+    public GameOver(): void {
+        this.IsDead = true;
+        this._eff.On();
     }
 }
 
