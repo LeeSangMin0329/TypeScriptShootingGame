@@ -2,14 +2,15 @@
 var backGround: BackGround = new BackGround();
 
 function GameLoop() {
-    calcKeyInnput();
-
+    
     gameManager.MainUpdate();
 
     
     backGround.BackScroll();
 
     gameManager.MainDraw();
+
+    Common.DrawText("SCORE : " + Common.Score, 10, 30);
 }
 window.addEventListener('load', function () {
     window.addEventListener('keydown', OnKeyDown);

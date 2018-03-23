@@ -71,9 +71,12 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="Bullet.ts" />
+    <TypeScriptCompile Include="Collision.ts" />
+    <TypeScriptCompile Include="Enemy.ts" />
     <TypeScriptCompile Include="GameManager.ts" />
     <TypeScriptCompile Include="InputManager.ts" />
     <TypeScriptCompile Include="Instantiate.ts" />
+    <TypeScriptCompile Include="ParticleSystem.ts" />
     <TypeScriptCompile Include="Player.ts" />
   </ItemGroup>
   <ItemGroup>

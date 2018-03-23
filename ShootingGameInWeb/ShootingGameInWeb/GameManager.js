@@ -5,6 +5,7 @@ var GameManager = /** @class */ (function () {
             this._enemyList.push(new Enemy());
         }
         this._player = new Player();
+        this._collsion = new Collision();
     }
     GameManager.prototype.EnemyMake = function () {
         this._randomNum = Math.floor(Math.random() * Common.PercentageCreateEnemy);
@@ -12,7 +13,7 @@ var GameManager = /** @class */ (function () {
             return;
         }
         for (var i = 0; i < this._enemyList.length; i++) {
-            if (this._enemyList[i].IsDead()) {
+            if (this._enemyList[i].IsDead) {
                 this._enemyList[i].Init();
                 break;
             }
@@ -20,14 +21,14 @@ var GameManager = /** @class */ (function () {
     };
     GameManager.prototype.EnemyUpdate = function () {
         for (var i = 0; i < this._enemyList.length; i++) {
-            if (!this._enemyList[i].IsDead()) {
+            if (!this._enemyList[i].IsDead) {
                 this._enemyList[i].MoveEnemy();
             }
         }
     };
     GameManager.prototype.EnemyDraw = function () {
         for (var i = 0; i < this._enemyList.length; i++) {
-            if (!this._enemyList[i].IsDead()) {
+            if (!this._enemyList[i].IsDead) {
                 this._enemyList[i].Draw();
             }
         }
@@ -36,13 +37,13 @@ var GameManager = /** @class */ (function () {
         this._player.Update();
         this.EnemyMake();
         this.EnemyUpdate();
+        // Collision
+        this._collsion.CheckPlayerToEnemys(this._player, this._enemyList);
+        this._collsion.CheckBulletToEnemys(this._player.BulletList(), this._enemyList);
     };
     GameManager.prototype.MainDraw = function () {
         this.EnemyDraw();
         this._player.Draw();
-    };
-    GameManager.prototype.PlayerMove = function (xDist, yDist) {
-        this._player.Move(xDist, yDist);
     };
     return GameManager;
 }());

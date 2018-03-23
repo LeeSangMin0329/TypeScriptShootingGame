@@ -7,9 +7,14 @@
 
     static readonly PlayerMoveSpeed: number = 8;
     static readonly BulletSpeed: number = 8;
+    static readonly BulletDamage: number = 40;
 
     static readonly PoolingEnemyCount: number = 5;
     static readonly PoolingBulletCount: number = 10;
+
+    static KeyPressOn = {};
+
+    static Score: number = 0;
 
     static readonly Canvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('Canvas');
     static readonly Context: CanvasRenderingContext2D = Common.Canvas.getContext("2d");
@@ -17,8 +22,14 @@
     public static DrawContext(img: HTMLImageElement, xPos: number, yPos: number, w: number, h: number): void {
         Common.Context.drawImage(img, xPos, yPos, w, h);
     }
+
+    public static DrawText(str: string, xPos: number, yPos: number) {
+        Common.Context.fillText(str, xPos, yPos);
+    }
 }
 
+Common.Context.fillStyle = "white";
+Common.Context.font = '20pt Arial';
 
 
 
@@ -50,51 +61,6 @@ class BackGround {
         if (this._backImgYPos2 >= Common.ScreenHeight) {
             this._backImgYPos2 = -Common.ScreenHeight;
             this._backImgYPos1 = 0;
-        }
-    }
-}
-
-// enemy img src
-var EnemyImgSrc: string = 'images/무냐.png';
-
-class Enemy {
-
-    private _enemyImg: HTMLImageElement = new Image();
-    private _isDead: boolean = true;
-
-    private _moveSpeed: number = 10;
-    private _xPos: number;
-    private _yPos: number;
-
-    constructor() {
-        this._enemyImg.src = EnemyImgSrc; // do you random if other img src exist;
-        var randomNum: number = Math.floor(Math.random() * 5);
-        this._xPos = Common.ScreenWidth * 0.1 * randomNum;
-        this._yPos = -50;
-    }
-
-    public Init(): void {
-        this._isDead = false;
-        var randomNum: number = Math.floor(Math.random() * 9);
-        this._xPos = Common.ScreenWidth * 0.1 * randomNum;
-        this._yPos = -50;
-    }
-
-    public IsDead(): boolean {
-        return this._isDead;
-    }
-
-    public MoveEnemy(): void {
-        if (!this._isDead) {
-            this._yPos += this._moveSpeed;
-            if (this._yPos >= Common.ScreenHeight + 50) {
-                this._isDead = true;
-            }
-        }
-    }
-    public Draw(): void {
-        if (!this._isDead) {
-            Common.DrawContext(this._enemyImg, this._xPos, this._yPos, 100, 100);
         }
     }
 }
