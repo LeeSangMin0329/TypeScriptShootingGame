@@ -2,14 +2,9 @@
 var backGround: BackGround = new BackGround();
 
 function GameLoop() {
-    
     gameManager.MainUpdate();
-
-    
     backGround.BackScroll();
-
     gameManager.MainDraw();
-
     Common.DrawText("SCORE : " + Common.Score, 10, 30);
 
     // double buffering
